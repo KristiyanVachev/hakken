@@ -298,7 +298,9 @@ const LANGUAGES = [
   { value: "Mandarin", label: "Mandarin (coming soon)" },
   { value: "German", label: "German (coming soon)" },
   { value: "Other", label: "Other — write it in" },
-];
+] as const;
+
+type LanguageValue = (typeof LANGUAGES)[number]["value"];
 
 const defectorSchema = z.object({
   name: z.string().trim().min(1, "Name required").max(80),
