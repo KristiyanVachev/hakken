@@ -512,11 +512,7 @@ function useDefectors() {
   useEffect(() => {
     let cancelled = false;
     (async () => {
-      const { data } = await supabase
-        .from("defectors_public" as never)
-        .select("id,name,streak,language,other_language,created_at")
-        .order("created_at", { ascending: false })
-        .limit(500);
+      const { data } = await supabase.rpc("get_defectors_public" as never);
       if (!cancelled && data) setRows(data as Defector[]);
     })();
     return () => {
