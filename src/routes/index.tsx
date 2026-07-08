@@ -613,13 +613,13 @@ function Hero() {
         </div>
       </header>
 
-      <div className="mx-auto mt-8 max-w-5xl md:mt-12">
+      <div className="mx-auto mt-8 max-w-2xl md:mt-12">
         <div
-          className="relative border-4 border-[var(--ink)] bg-[var(--ink)] shadow-[10px_10px_0_var(--blood)]"
+          className="relative border-4 border-[var(--ink)] bg-[var(--ink)] shadow-[8px_8px_0_var(--blood)]"
           style={{ transform: "rotate(-0.6deg)" }}
         >
-          <div className="tape absolute -top-5 left-8 h-7 w-28 -rotate-3" />
-          <div className="tape absolute -top-4 right-10 h-6 w-24 rotate-6" />
+          <div className="tape absolute -top-4 left-8 h-5 w-24 -rotate-3" />
+          <div className="tape absolute -top-3 right-10 h-5 w-20 rotate-6" />
           <img
             src={heroAsset.url}
             alt="Hakken — God Save the Streak, 1999 days, a self-taught rebellion"
