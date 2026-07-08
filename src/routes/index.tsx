@@ -329,18 +329,21 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
   const [email, setEmail] = useState("");
   const [streak, setStreak] = useState<string>("0");
   const [language, setLanguage] = useState("Japanese");
+  const [otherLanguage, setOtherLanguage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
-    const parsed = defectorSchema.safeParse({
+    const payload: z.infer<typeof defectorSchema> = {
       name,
       email,
       streak: Number(streak),
       language,
-    });
+      other_language: language === "Other" ? otherLanguage : undefined,
+    };
+    const parsed = defectorSchema.safeParse(payload);
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Check your entries.");
       return;
@@ -359,6 +362,7 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
     setEmail("");
     setStreak("0");
     setLanguage("Japanese");
+    setOtherLanguage("");
     onJoined();
   }
 
