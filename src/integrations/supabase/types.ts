@@ -46,36 +46,20 @@ export type Database = {
       }
     }
     Views: {
-      defectors_public: {
-        Row: {
-          created_at: string | null
-          id: string | null
-          language: string | null
-          name: string | null
-          other_language: string | null
-          streak: number | null
-        }
-        Insert: {
-          created_at?: string | null
-          id?: string | null
-          language?: string | null
-          name?: string | null
-          other_language?: string | null
-          streak?: number | null
-        }
-        Update: {
-          created_at?: string | null
-          id?: string | null
-          language?: string | null
-          name?: string | null
-          other_language?: string | null
-          streak?: number | null
-        }
-        Relationships: []
-      }
+      [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      get_defectors_public: {
+        Args: never
+        Returns: {
+          created_at: string
+          id: string
+          language: string
+          name: string
+          other_language: string
+          streak: number
+        }[]
+      }
     }
     Enums: {
       [_ in never]: never
