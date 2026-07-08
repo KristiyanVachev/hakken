@@ -501,6 +501,7 @@ type Defector = {
   name: string;
   streak: number;
   language: string;
+  other_language: string | null;
   created_at: string;
 };
 
