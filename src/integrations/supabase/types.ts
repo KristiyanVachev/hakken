@@ -21,6 +21,7 @@ export type Database = {
           id: string
           language: string
           name: string
+          other_language: string | null
           streak: number
         }
         Insert: {
@@ -29,6 +30,7 @@ export type Database = {
           id?: string
           language: string
           name: string
+          other_language?: string | null
           streak?: number
         }
         Update: {
@@ -37,6 +39,7 @@ export type Database = {
           id?: string
           language?: string
           name?: string
+          other_language?: string | null
           streak?: number
         }
         Relationships: []
@@ -46,7 +49,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      update_defectors_insert_policy_check: { Args: never; Returns: boolean }
     }
     Enums: {
       [_ in never]: never
