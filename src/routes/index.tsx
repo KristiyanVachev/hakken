@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import heroAsset from "@/assets/hakken-hero.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   component: HakkenPage,
@@ -611,28 +613,26 @@ function Hero() {
         </div>
       </header>
 
-      <div className="mt-8 grid items-center gap-10 md:mt-14 md:grid-cols-5">
-        <div className="md:col-span-3">
-          <div
-            className="mb-4 inline-block px-2 py-1 text-xs uppercase"
-            style={{
-              background: "var(--ink)",
-              color: "var(--paper)",
-              letterSpacing: "0.3em",
-              transform: "rotate(-2deg)",
-            }}
-          >
-            1999-day communiqué
-          </div>
-          <RansomHeadline
-            text="GOD SAVE THE STREAK"
-            className="text-[15vw] leading-[0.9] md:text-[7rem]"
+      <div className="mx-auto mt-8 max-w-5xl md:mt-12">
+        <div
+          className="relative border-4 border-[var(--ink)] bg-[var(--ink)] shadow-[10px_10px_0_var(--blood)]"
+          style={{ transform: "rotate(-0.6deg)" }}
+        >
+          <div className="tape absolute -top-5 left-8 h-7 w-28 -rotate-3" />
+          <div className="tape absolute -top-4 right-10 h-6 w-24 rotate-6" />
+          <img
+            src={heroAsset.url}
+            alt="Hakken — God Save the Streak, 1999 days, a self-taught rebellion"
+            className="block h-auto w-full"
           />
-          <p className="mt-6 max-w-xl text-lg md:text-xl">
+        </div>
+
+        <div className="mt-8 grid gap-6 md:grid-cols-[2fr_1fr] md:items-end">
+          <p className="max-w-xl text-lg md:text-xl">
             Tonight I'm killing my <strong>1999-day Duolingo streak</strong>.
             The habit comes with me.
           </p>
-          <div className="mt-8 flex flex-wrap items-center gap-4">
+          <div className="flex flex-wrap items-center gap-4 md:justify-end">
             <a href="#defect" className="stamp-btn stamp-btn-hover no-underline">
               Defect →
             </a>
@@ -644,13 +644,11 @@ function Hero() {
             </a>
           </div>
         </div>
-        <div className="md:col-span-2">
-          <OwlPoster />
-        </div>
       </div>
     </section>
   );
 }
+
 
 // ---------- Footer ----------
 
