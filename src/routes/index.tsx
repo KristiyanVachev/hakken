@@ -297,6 +297,7 @@ const LANGUAGES = [
   { value: "French", label: "French (coming soon)" },
   { value: "Mandarin", label: "Mandarin (coming soon)" },
   { value: "German", label: "German (coming soon)" },
+  { value: "Other", label: "Other — write it in" },
 ];
 
 const defectorSchema = z.object({
@@ -310,8 +311,18 @@ const defectorSchema = z.object({
     "French",
     "Mandarin",
     "German",
+    "Other",
   ]),
-});
+  other_language: z.string().trim().max(60).optional(),
+}).refine(
+  (data) =>
+    data.language !== "Other" ||
+    (data.other_language !== undefined && data.other_language.length >= 1),
+  {
+    message: "Write in your language",
+    path: ["other_language"],
+  }
+);
 
 function DefectForm({ onJoined }: { onJoined: () => void }) {
   const [name, setName] = useState("");
