@@ -568,7 +568,10 @@ function Wall({ rows }: { rows: Defector[] }) {
               >
                 <span className="truncate">{r.name}</span>
                 <span className="opacity-70">
-                  — {r.streak.toLocaleString()} days — {r.language}
+                  — {r.streak.toLocaleString()} days —{" "}
+                  {r.language === "Other" && r.other_language
+                    ? r.other_language
+                    : r.language}
                 </span>
               </li>
             ))}
