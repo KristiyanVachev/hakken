@@ -513,8 +513,8 @@ function useDefectors() {
     let cancelled = false;
     (async () => {
       const { data } = await supabase
-        .from("defectors")
-        .select("id,name,streak,language,created_at")
+        .from("defectors_public" as never)
+        .select("id,name,streak,language,other_language,created_at")
         .order("created_at", { ascending: false })
         .limit(500);
       if (!cancelled && data) setRows(data as Defector[]);

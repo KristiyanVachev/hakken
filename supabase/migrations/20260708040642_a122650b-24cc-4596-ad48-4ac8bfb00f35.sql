@@ -1,0 +1,1 @@
+DROP POLICY IF EXISTS "public read defectors safe columns" ON public.defectors;

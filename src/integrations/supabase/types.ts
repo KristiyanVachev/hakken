@@ -46,7 +46,33 @@ export type Database = {
       }
     }
     Views: {
-      [_ in never]: never
+      defectors_public: {
+        Row: {
+          created_at: string | null
+          id: string | null
+          language: string | null
+          name: string | null
+          other_language: string | null
+          streak: number | null
+        }
+        Insert: {
+          created_at?: string | null
+          id?: string | null
+          language?: string | null
+          name?: string | null
+          other_language?: string | null
+          streak?: number | null
+        }
+        Update: {
+          created_at?: string | null
+          id?: string | null
+          language?: string | null
+          name?: string | null
+          other_language?: string | null
+          streak?: number | null
+        }
+        Relationships: []
+      }
     }
     Functions: {
       [_ in never]: never
