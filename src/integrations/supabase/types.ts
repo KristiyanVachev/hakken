@@ -49,7 +49,7 @@ export type Database = {
       [_ in never]: never
     }
     Functions: {
-      update_defectors_insert_policy_check: { Args: never; Returns: boolean }
+      [_ in never]: never
     }
     Enums: {
       [_ in never]: never

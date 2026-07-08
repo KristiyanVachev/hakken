@@ -1,0 +1,1 @@
+DROP FUNCTION IF EXISTS public.update_defectors_insert_policy_check();
