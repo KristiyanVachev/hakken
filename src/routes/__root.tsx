@@ -86,10 +86,14 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { property: "og:title", content: "Hakken — God Save the Streak" },
       {
         property: "og:description",
-        content: "A self-taught rebellion. Kill the owl, keep the habit.",
+        content: "A self-taught rebellion. Kill the owl, keep the habit. Learn Japanese from the media you already love.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
+      { name: "twitter:title", content: "Hakken — God Save the Streak" },
+      { name: "twitter:description", content: "A self-taught rebellion. Kill the owl, keep the habit. Learn Japanese from the media you already love." },
+      { property: "og:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f15e95c0-7b33-4133-b83c-474676acfd2e/id-preview-8cde3aaa--63892f10-4b9f-4eee-a9d2-ff78dabc4eb3.lovable.app-1783481326718.png" },
+      { name: "twitter:image", content: "https://pub-bb2e103a32db4e198524a2e9ed8f35b4.r2.dev/f15e95c0-7b33-4133-b83c-474676acfd2e/id-preview-8cde3aaa--63892f10-4b9f-4eee-a9d2-ff78dabc4eb3.lovable.app-1783481326718.png" },
     ],
     links: [
       { rel: "stylesheet", href: appCss },
