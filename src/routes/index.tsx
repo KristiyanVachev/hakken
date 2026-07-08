@@ -2,6 +2,8 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState, type FormEvent } from "react";
 import { z } from "zod";
 import { supabase } from "@/integrations/supabase/client";
+import heroAsset from "@/assets/hakken-hero.png.asset.json";
+
 
 export const Route = createFileRoute("/")({
   component: HakkenPage,
