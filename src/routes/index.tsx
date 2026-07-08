@@ -297,7 +297,10 @@ const LANGUAGES = [
   { value: "French", label: "French (coming soon)" },
   { value: "Mandarin", label: "Mandarin (coming soon)" },
   { value: "German", label: "German (coming soon)" },
-];
+  { value: "Other", label: "Other — write it in" },
+] as const;
+
+type LanguageValue = (typeof LANGUAGES)[number]["value"];
 
 const defectorSchema = z.object({
   name: z.string().trim().min(1, "Name required").max(80),
@@ -310,26 +313,39 @@ const defectorSchema = z.object({
     "French",
     "Mandarin",
     "German",
+    "Other",
   ]),
-});
+  other_language: z.string().trim().max(60).optional(),
+}).refine(
+  (data) =>
+    data.language !== "Other" ||
+    (data.other_language !== undefined && data.other_language.length >= 1),
+  {
+    message: "Write in your language",
+    path: ["other_language"],
+  }
+);
 
 function DefectForm({ onJoined }: { onJoined: () => void }) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [streak, setStreak] = useState<string>("0");
-  const [language, setLanguage] = useState("Japanese");
+  const [language, setLanguage] = useState<LanguageValue>("Japanese");
+  const [otherLanguage, setOtherLanguage] = useState("");
   const [status, setStatus] = useState<"idle" | "loading" | "ok" | "error">("idle");
   const [error, setError] = useState<string | null>(null);
 
   async function onSubmit(e: FormEvent) {
     e.preventDefault();
     setError(null);
-    const parsed = defectorSchema.safeParse({
+    const payload: z.infer<typeof defectorSchema> = {
       name,
       email,
       streak: Number(streak),
       language,
-    });
+      other_language: language === "Other" ? otherLanguage : undefined,
+    };
+    const parsed = defectorSchema.safeParse(payload);
     if (!parsed.success) {
       setError(parsed.error.issues[0]?.message ?? "Check your entries.");
       return;
@@ -348,6 +364,7 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
     setEmail("");
     setStreak("0");
     setLanguage("Japanese");
+    setOtherLanguage("");
     onJoined();
   }
 
@@ -403,7 +420,7 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
         <Field label="Language">
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => setLanguage(e.target.value as LanguageValue)}
             className="w-full border-2 border-[var(--ink)] bg-transparent px-3 py-2 text-lg outline-none focus:bg-[oklch(0.94_0.03_85)]"
           >
             {LANGUAGES.map((l) => (
@@ -413,6 +430,19 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
             ))}
           </select>
         </Field>
+
+        {language === "Other" && (
+          <Field label="Your language" helper="e.g. Cantonese, Vietnamese, Arabic">
+            <input
+              type="text"
+              required
+              value={otherLanguage}
+              onChange={(e) => setOtherLanguage(e.target.value)}
+              maxLength={60}
+              className="w-full border-2 border-[var(--ink)] bg-transparent px-3 py-2 text-lg outline-none focus:bg-[oklch(0.94_0.03_85)]"
+            />
+          </Field>
+        )}
 
         {error && (
           <div className="border-2 border-[var(--blood)] bg-[var(--blood)]/10 px-3 py-2 text-sm text-[var(--blood)]">
@@ -471,6 +501,7 @@ type Defector = {
   name: string;
   streak: number;
   language: string;
+  other_language: string | null;
   created_at: string;
 };
 
@@ -537,7 +568,10 @@ function Wall({ rows }: { rows: Defector[] }) {
               >
                 <span className="truncate">{r.name}</span>
                 <span className="opacity-70">
-                  — {r.streak.toLocaleString()} days — {r.language}
+                  — {r.streak.toLocaleString()} days —{" "}
+                  {r.language === "Other" && r.other_language
+                    ? r.other_language
+                    : r.language}
                 </span>
               </li>
             ))}

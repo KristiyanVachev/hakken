@@ -21,6 +21,7 @@ export type Database = {
           id: string
           language: string
           name: string
+          other_language: string | null
           streak: number
         }
         Insert: {
@@ -29,6 +30,7 @@ export type Database = {
           id?: string
           language: string
           name: string
+          other_language?: string | null
           streak?: number
         }
         Update: {
@@ -37,6 +39,7 @@ export type Database = {
           id?: string
           language?: string
           name?: string
+          other_language?: string | null
           streak?: number
         }
         Relationships: []
