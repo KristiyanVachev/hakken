@@ -14,7 +14,33 @@ export type Database = {
   }
   public: {
     Tables: {
-      [_ in never]: never
+      defectors: {
+        Row: {
+          created_at: string
+          email: string
+          id: string
+          language: string
+          name: string
+          streak: number
+        }
+        Insert: {
+          created_at?: string
+          email: string
+          id?: string
+          language: string
+          name: string
+          streak?: number
+        }
+        Update: {
+          created_at?: string
+          email?: string
+          id?: string
+          language?: string
+          name?: string
+          streak?: number
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
