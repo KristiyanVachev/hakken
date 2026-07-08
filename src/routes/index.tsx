@@ -420,7 +420,7 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
         <Field label="Language">
           <select
             value={language}
-            onChange={(e) => setLanguage(e.target.value)}
+            onChange={(e) => setLanguage(e.target.value as LanguageValue)}
             className="w-full border-2 border-[var(--ink)] bg-transparent px-3 py-2 text-lg outline-none focus:bg-[oklch(0.94_0.03_85)]"
           >
             {LANGUAGES.map((l) => (
@@ -430,6 +430,19 @@ function DefectForm({ onJoined }: { onJoined: () => void }) {
             ))}
           </select>
         </Field>
+
+        {language === "Other" && (
+          <Field label="Your language" helper="e.g. Cantonese, Vietnamese, Arabic">
+            <input
+              type="text"
+              required
+              value={otherLanguage}
+              onChange={(e) => setOtherLanguage(e.target.value)}
+              maxLength={60}
+              className="w-full border-2 border-[var(--ink)] bg-transparent px-3 py-2 text-lg outline-none focus:bg-[oklch(0.94_0.03_85)]"
+            />
+          </Field>
+        )}
 
         {error && (
           <div className="border-2 border-[var(--blood)] bg-[var(--blood)]/10 px-3 py-2 text-sm text-[var(--blood)]">
